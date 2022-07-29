@@ -1,0 +1,43 @@
+function emailconsul_queue($id, $recipient, $sender, $connection, $jobid = none) {
+    unset($connection["tls"]["peercert"]);
+    return [
+        "type" => "queue",
+        "time" => round(time() * 1000),
+        "id" => $id,
+        "recipient" => $recipient["address"],
+        "transportid" => $recipient["transportid"],
+        "sender" => $sender,
+        "connection" => $connection,
+        "jobid" => $jobid
+    ];
+}
+
+function emailconsul_delivery($arguments, $message) {
+    unset($arguments["attempt"]["connection"]["tls"]["peercert"]);
+    unset($message["file"]);
+    return [
+        "type" => "delivery",
+        "time" => round(time() * 1000),
+        "message" => $message,
+        ...$arguments
+    ];
+}
+
+function emailconsul_async($dsn, $recipient, $dsnrecipient) {
+    return [
+        "type" => "async",
+        "time" => round(time() * 1000),
+        "message" => $dsn["message"],
+        "sender" => $recipient["address"],
+        "transportid" => $recipient["transportid"],
+        "recipient" => $dsnrecipient
+    ];
+}
+
+function emailconsul_arf($arf) {
+    return [
+        "type" => "arf",
+        "time" => round(time() * 1000),
+        ...$arf
+    ];
+}
