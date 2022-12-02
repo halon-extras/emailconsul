@@ -73,7 +73,7 @@ The async delivery event as an associative array.
 **Example**
 
 ```
-import { dsn_parse } from "modules/dsn/dsn.hsl";
+import { dsn_parse } from "extras://dsn";
 import { emailconsul_async } from "modules/emailconsul/emailconsul.hsl";
 
 $dsn = dsn_parse($arguments["mail"]);
@@ -102,7 +102,7 @@ The feedback loop event as an associative array.
 **Example**
 
 ```
-import { arf_parse } from "modules/arf/arf.hsl";
+import { arf_parse } from "extras://arf";
 import { emailconsul_arf } from "modules/emailconsul/emailconsul.hsl";
 
 $arf = arf_parse($arguments["mail"]);
