@@ -24,7 +24,7 @@ The queue event as an associative array.
 **Example**
 
 ```
-import { emailconsul_queue } from "modules/emailconsul/emailconsul.hsl";
+import { emailconsul_queue } from "modules/emailconsul";
 
 // Queue message for all recipients
 foreach ($transaction["recipients"] as $recipient) {
@@ -50,7 +50,7 @@ The delivery event as an associative array.
 **Example**
 
 ```
-import { emailconsul_delivery } from "modules/emailconsul/emailconsul.hsl";
+import { emailconsul_delivery } from "modules/emailconsul";
 
 $emailconsul = emailconsul_delivery($arguments, $message);
 http_bulk("emailconsul", json_encode($emailconsul));
@@ -74,7 +74,7 @@ The async delivery event as an associative array.
 
 ```
 import { dsn_parse } from "extras://dsn";
-import { emailconsul_async } from "modules/emailconsul/emailconsul.hsl";
+import { emailconsul_async } from from "modules/emailconsul";
 
 $dsn = dsn_parse($arguments["mail"]);
 if ($dsn) {
@@ -103,7 +103,7 @@ The feedback loop event as an associative array.
 
 ```
 import { arf_parse } from "extras://arf";
-import { emailconsul_arf } from "modules/emailconsul/emailconsul.hsl";
+import { emailconsul_arf } from "modules/emailconsul";
 
 $arf = arf_parse($arguments["mail"]);
 if ($arf) {
