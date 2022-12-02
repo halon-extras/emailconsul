@@ -4,16 +4,17 @@ This HSL module can be used to send send email delivery results to Email Consul.
 
 ## Exported functions
 
-### emailconsul_queue($id, $recipient, $sender, $connection, $jobid = none)
+### emailconsul_queue($arguments, $connection, $id, $recipient, $sender, $jobid = none)
 
 This function should be called when queueing the message in the [EOD](https://docs.halon.io/hsl/eod.html) script.
 
 **Params**
 
+- `$arguments` The [pre-defined](https://docs.halon.io/hsl/eodonce.html#arguments) `$arguments` variable
+- `$connection` The [pre-defined](https://docs.halon.io/hsl/eodonce.html#connection) `$connection` variable
 - `$id` The id of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
 - `$recipient` The [recipient](https://docs.halon.io/hsl/eodonce.html#recipient) of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
 - `$sender` The [sender](https://docs.halon.io/hsl/eodonce.html#a6) of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
-- `$connection` The [pre-defined](https://docs.halon.io/hsl/eodonce.html#v-c6) `$connection` variable
 - `$jobid` The job id of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
 
 **Returns**
@@ -28,7 +29,7 @@ import { emailconsul_queue } from "modules/emailconsul/emailconsul.hsl";
 // Queue message for all recipients
 foreach ($transaction["recipients"] as $recipient) {
     $id = $mail->queue($transaction["sender"], $recipient["address"], $recipient["transportid"]);
-    $emailconsul = emailconsul_queue($id, $recipient, $transaction["sender"], $connection);
+    $emailconsul = emailconsul_queue($arguments, $connection, $id, $recipient, $transaction["sender"]);
     http_bulk("emailconsul", json_encode($emailconsul));
 }
 ```

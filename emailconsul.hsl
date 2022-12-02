@@ -1,4 +1,4 @@
-function emailconsul_queue($id, $recipient, $sender, $connection, $jobid = none) {
+function emailconsul_queue($arguments, $connection, $id, $recipient, $sender, $jobid = none) {
     unset($connection["tls"]["peercert"]);
     return [
         "type" => "queue",
