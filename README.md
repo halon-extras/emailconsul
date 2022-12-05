@@ -12,9 +12,9 @@ This function should be called when queueing the message in the [EOD](https://do
 
 - `$arguments` The [pre-defined](https://docs.halon.io/hsl/eodonce.html#arguments) `$arguments` variable
 - `$connection` The [pre-defined](https://docs.halon.io/hsl/eodonce.html#connection) `$connection` variable
+- `$transaction` The [pre-defined](https://docs.halon.io/hsl/eodonce.html#transaction) `$transaction` variable
 - `$id` The id of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
 - `$recipient` The [recipient](https://docs.halon.io/hsl/eodonce.html#recipient) of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
-- `$sender` The [sender](https://docs.halon.io/hsl/eodonce.html#a6) of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
 - `$jobid` The job id of the [queued](https://docs.halon.io/hsl/eodonce.html#EODMailMessage.queue) message
 
 **Returns**
