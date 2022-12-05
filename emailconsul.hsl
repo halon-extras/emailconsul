@@ -1,19 +1,34 @@
-function emailconsul_queue($arguments, $connection, $id, $recipient, $sender, $jobid = none) {
+function emailconsul_queue($arguments, $connection, $transaction, $id, $recipient, $jobid = none) {
     unset($connection["tls"]["peercert"]);
+    $mail = $arguments["mail"];
+    $fromheader = $mail->getHeader("From");
+    $from = header_addresslist_extract($fromheader)[0];
+    $fromaddress = envelope_address_parse($from);
     return [
         "type" => "queue",
         "time" => round(time() * 1000),
         "id" => $id,
-        "recipient" => $recipient["address"],
+        "recipient" => $recipient["recipient"],
+        "recipientaddress" => $recipient["address"],
         "transportid" => $recipient["transportid"],
-        "sender" => $sender,
+        "sender" => $transaction["sender"],
+        "senderaddress" => $transaction["senderaddress"],
+        "from" => $from,
+        "fromaddress" => $fromaddress,
         "connection" => $connection,
         "jobid" => $jobid
     ];
 }
 
 function emailconsul_delivery($arguments, $message) {
+    $arguments["action"] = $arguments["action"] ?? "SUCCESS";
     unset($arguments["attempt"]["connection"]["tls"]["peercert"]);
+    $mail = MailMessage::File(File($message["file"]["modified"]));
+    $fromheader = $mail->getHeader("From");
+    $from = header_addresslist_extract($fromheader)[0];
+    $fromaddress = envelope_address_parse($from);
+    $message["from"] = $from;
+    $message["fromaddress"] = $fromaddress;
     unset($message["file"]);
     return [
         "type" => "delivery",

@@ -29,7 +29,7 @@ import { emailconsul_queue } from "modules/emailconsul";
 // Queue message for all recipients
 foreach ($transaction["recipients"] as $recipient) {
     $id = $mail->queue($transaction["sender"], $recipient["address"], $recipient["transportid"]);
-    $emailconsul = emailconsul_queue($arguments, $connection, $id, $recipient, $transaction["sender"]);
+    $emailconsul = emailconsul_queue($arguments, $connection, $transaction, $id, $recipient);
     http_bulk("emailconsul", json_encode($emailconsul));
 }
 ```
