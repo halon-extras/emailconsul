@@ -4,7 +4,7 @@ This HSL module can be used to send send email delivery results to Email Consul.
 
 ## Exported functions
 
-### emailconsul_queue($arguments, $connection, $id, $recipient, $sender, $jobid = none)
+### emailconsul_queue($arguments, $connection, $transaction, $id, $recipient, $jobid = none)
 
 This function should be called when queueing the message in the [EOD](https://docs.halon.io/hsl/eod.html) script.
 
